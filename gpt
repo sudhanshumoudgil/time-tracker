@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Update package list
+sudo apt-get update
+
+# Install Apache or Nginx
+while true; do
+    read -p "Do you want to install Apache or Nginx? [A/N]: " choice
+    case $choice in
+        [Aa]* )
+            sudo apt-get install apache2 -y
+            break;;
+        [Nn]* )
+            sudo apt-get install nginx -y
+            break;;
+        * )
+            echo "Please choose A for Apache or N for Nginx.";;
+    esac
+done
+
+# Install PHP
+while true; do
+    read -p "Enter the PHP version you want to install [e.g., 7.4]: " php_version
+    if [[ ! $php_version =~ ^[0-9]+\.[0-9]+$ ]]; then
+        echo "Invalid PHP version. Please enter a version like 7.4."
+    else
+        sudo apt-get install php$php_version php$php_version-cli php$php_version-common -y
+        break
+    fi
+done
+
+# Install MySQL or MariaDB
+while true; do
+    read -p "Do you want to install MySQL or MariaDB? [M/m]: " choice
+    case $choice in
+        [Mm]* )
+            sudo apt-get install mysql-server -y
+            break;;
+        * )
+            sudo apt-get install mariadb-server -y
+            break;;
+    esac
+done
