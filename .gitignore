@@ -11,3 +11,8 @@ buildNumber.properties
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <PUBKEY>
 
+
+
+sudo gpg --keyserver pgpkeys.mit.edu --recv-key  <PUBKEY>
+sudo gpg -a --export <PUBKEY> | sudo apt-key add -
+sudo apt-get update
