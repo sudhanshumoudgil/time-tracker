@@ -1,0 +1,67 @@
+#!/bin/bash
+echo ""
+PS3='Please enter your choice: '
+echo 'Select your WebServer: '
+options=("apache2" "nginx")
+select opt in "${options[@]}"
+do
+            echo "${opt}"
+            sudo apt-get update 
+            sudo apt install ${opt} -y 
+            sudo systemctl restart ${opt}
+            break         
+done
+#----------------------------
+echo ""
+PS3='Please enter your choice: '
+echo 'Select your PHP versions: '
+options=("8.1" "8.0" "7.4" "7.3" "7.2" "7.1" "7.0" "6.0")
+select php_ver in "${options[@]}"
+do
+    echo "php${php_ver}"
+    sudo apt-get update 
+    sudo apt-get install php$php_version php$php_version.*-cli php$php_version-common -y
+    break    
+done
+#----------------------------
+echo ""
+PS3='Please enter your choice: '
+echo 'Select your Database: '
+options=("MySQL" "mariaDB" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "MySQL")
+            PS3='Please enter your choice: '
+            echo 'Select your MySQL version: ' 
+            mysql_versions=("8.0" "5.7" "5.6" "5.5" "5.1")
+            select mysql_ver in "${mysql_versions[@]}"
+            do
+              echo "mySQL${mysql_ver}"
+              sudo apt-get update 
+              sudo apt-get install mysql-server -y 
+              sudo systemctl start mysql.service
+              break
+            done
+            break
+            ;;  
+        "mariaDB")
+            PS3='Please enter your choice: '
+            echo 'Select your mariaDB version: '
+            mariadb_versions=("11.1" "11.0" "10.11" "10.10")
+            select maria_ver in ${mariadb_versions[@]}
+            do
+              echo "mariaDB${maria_ver}"
+              sudo apt-get update 
+              sudo apt-get install mariadb-server -y 
+              sudo systemctl start mariadb${maria_ver}
+              break
+            done
+            break
+            ;;  
+        "Quit")
+            break
+            ;;  
+        *) echo "invalid option $REPLY";;
+    esac
+done
