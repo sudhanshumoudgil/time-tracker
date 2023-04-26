@@ -11,3 +11,4 @@ E: Regex compilation error - Unmatched [, [^, [:, [., or [=
 E: Couldn't find any package by regex 'apache2'
 Invalid unit name "apache2" escaped as "\x1b[42mapache2\x1b[0m" (maybe you should use systemd-escape?).
 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5BA31D57EF5975CA
